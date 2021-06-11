@@ -98,7 +98,13 @@ class ConditionalContainer extends Field
 
         }
 
-        /**
+	    $expressionsMap = $this->expressions->map(function ($expression) {
+		    return is_callable($expression) ? $expression() : $expression;
+	    });
+
+	    $this->withMeta(['expressionsMap' => $expressionsMap]);
+
+	    /**
          * @var Field $field
          */
         foreach ($this->fields as $field) {
